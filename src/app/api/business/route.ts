@@ -19,10 +19,10 @@ export async function GET() {
     const mock: BusinessDTO[] = mockLocations.locations.map((loc) => ({
       id: loc.name,
       title: loc.title,
-      phone: loc.phoneNumbers?.primaryPhone || null,
-      address: loc.storefrontAddress?.addressLines?.join(", ") || null,
-      website: loc.websiteUri || null,
-      hours: loc.regularHours || null,
+      phone: loc.phoneNumbers?.primaryPhone ?? null,
+      address: loc.storefrontAddress?.addressLines?.join(", ") ?? null,
+      website: loc.websiteUri ?? null,
+      hours: loc.regularHours ?? null,
     }))
 
     return new Response(JSON.stringify(mock), { status: 200 })
