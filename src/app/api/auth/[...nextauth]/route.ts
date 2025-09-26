@@ -1,6 +1,18 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth, { NextAuthOptions, Session } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { prisma } from "@/lib/prisma"
+import type { JWT } from "next-auth/jwt"
+
+// Extensiones de tipos
+interface ExtendedSession extends Session {
+  accessToken?: string
+  businessId?: string
+}
+
+interface ExtendedToken extends JWT {
+  accessToken?: string
+  businessId?: string
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -38,7 +50,7 @@ export const authOptions: NextAuthOptions = {
           )
           const accountsData = await resAccounts.json()
 
-          let locationsData: any = null
+          let locationsData: unknown = null
 
           if (accountsData?.accounts?.length) {
             const accountId = accountsData.accounts[0].name
@@ -49,9 +61,14 @@ export const authOptions: NextAuthOptions = {
             locationsData = await resLocations.json()
           }
 
-          // si hay locations reales, guardamos; si no, quedará vacío (o podrías usar mock)
-          if (locationsData?.locations?.length) {
-            for (const loc of locationsData.locations) {
+          // si hay locations reales, guardamos; si no, quedará vacío
+          if (
+            typeof locationsData === "object" &&
+            locationsData !== null &&
+            "locations" in locationsData
+          ) {
+            const locs = (locationsData as { locations: any[] }).locations
+            for (const loc of locs) {
               await prisma.business.upsert({
                 where: { id: loc.name ?? `${dbUser.id}-${loc.title}` },
                 update: {
@@ -83,17 +100,12 @@ export const authOptions: NextAuthOptions = {
         return true
       }
     },
-    async jwt({ token, account }) {
-      if (account?.access_token) {
-        ;(token as any).accessToken = account.access_token
-      }
-      return token
-    },
-    async session({ session, token }) {
-      if ((token as any).accessToken) {
-        ;(session as any).accessToken = (token as any).accessToken
-      }
-      return session
+
+    async session({ session, token }: { session: Session; token: ExtendedToken }) {
+      const extended = session as ExtendedSession
+      if (token.accessToken) extended.accessToken = token.accessToken
+      if (token.businessId) extended.businessId = token.businessId
+      return extended
     },
   },
 }
