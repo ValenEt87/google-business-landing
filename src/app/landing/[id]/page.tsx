@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
+import { mockLocations } from "./mock"
 
 export default function LandingPage() {
   const { id } = useParams() as { id: string }
@@ -12,15 +13,26 @@ export default function LandingPage() {
     const fetchBusiness = async () => {
       try {
         const res = await fetch(`/api/business`)
-        const list = await res.json()
+        if (!res.ok) {
+          // ⚡ si la API falla, usamos mockLocations
+          const fallback = mockLocations.locations.find((b) => b.name === id)
+          setBusiness(fallback || null)
+          return
+        }
 
+        const list = await res.json()
         if (Array.isArray(list)) {
-          // Buscar el negocio con el id
           const found = list.find((b) => b.id === id)
           setBusiness(found || null)
+        } else {
+          // ⚡ si la API devuelve algo inesperado, también mock
+          const fallback = mockLocations.locations.find((b) => b.name === id)
+          setBusiness(fallback || null)
         }
       } catch (error) {
         console.error("Error fetching business:", error)
+        const fallback = mockLocations.locations.find((b) => b.name === id)
+        setBusiness(fallback || null)
       } finally {
         setLoading(false)
       }
@@ -49,27 +61,31 @@ export default function LandingPage() {
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">{business.title}</h1>
 
-      {business.address && <p className="mb-2">📍 {business.address}</p>}
-      {business.phone && <p className="mb-2">📞 {business.phone}</p>}
-      {business.website && (
+      {business.storefrontAddress?.addressLines && (
+        <p className="mb-2">📍 {business.storefrontAddress.addressLines.join(", ")}</p>
+      )}
+      {business.phoneNumbers?.primaryPhone && (
+        <p className="mb-2">📞 {business.phoneNumbers.primaryPhone}</p>
+      )}
+      {business.websiteUri && (
         <p className="mb-2">
           🌐{" "}
           <a
-            href={business.website}
+            href={business.websiteUri}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
           >
-            {business.website}
+            {business.websiteUri}
           </a>
         </p>
       )}
 
-      {business.hours && (
+      {business.regularHours && (
         <div className="mt-4">
           <h2 className="font-semibold mb-2">🕒 Horarios</h2>
           <ul className="list-disc list-inside">
-            {business.hours.periods?.map((p: any, idx: number) => (
+            {business.regularHours.periods?.map((p: any, idx: number) => (
               <li key={idx}>
                 {p.openDay}: {p.openTime} - {p.closeTime}
               </li>

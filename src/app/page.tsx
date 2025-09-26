@@ -1,37 +1,32 @@
-"use client"
+// src/app/page.tsx
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+import { authOptions } from "./api/auth/[...nextauth]/route"
+import { prisma } from "@/lib/prisma"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+export default async function Home() {
+  const session = await getServerSession(authOptions)
 
-export default function Home() {
-  const router = useRouter()
+  // Si no hay sesión, mandar al login
+  if (!session?.user?.email) {
+    redirect("/api/auth/signin")
+  }
 
-  useEffect(() => {
-    const goToLanding = async () => {
-      try {
-        const res = await fetch("/api/business")
-        if (!res.ok) {
-          console.error("Error al obtener negocios:", res.statusText)
-          return
-        }
+  // Buscar usuario y negocios
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    include: { businesses: true },
+  })
 
-        const list = await res.json()
-        if (Array.isArray(list) && list.length > 0 && list[0].id) {
-          router.replace(`/landing/${list[0].id}`)
-        } else {
-          console.warn("No se encontró ningún negocio.")
-        }
-      } catch (error) {
-        console.error("Error en fetch /api/business:", error)
-      }
-    }
+  // Si tiene negocio asociado → redirigir a su landing
+  if (user?.businesses[0]) {
+    redirect(`/landing/${user.businesses[0].id}`)
+  }
 
-    goToLanding()
-  }, [router])
-
+  // Si no tiene negocios aún
   return (
-    <main className="flex justify-center items-center h-screen">
-      <p>Redirigiendo a tu landing...</p>
-    </main>
+    <div className="flex justify-center items-center h-screen">
+      <p>No se encontraron negocios para esta cuenta.</p>
+    </div>
   )
 }
