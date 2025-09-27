@@ -101,6 +101,14 @@ export const authOptions: NextAuthOptions = {
       }
     },
 
+    async jwt({ token, account }: { token: ExtendedToken; account?: any }) {
+      // 💡 Guardamos el access_token si viene de Google
+      if (account?.access_token) {
+        token.accessToken = account.access_token
+      }
+      return token
+    },
+
     async session({ session, token }: { session: Session; token: ExtendedToken }) {
       const extended = session as ExtendedSession
       if (token.accessToken) extended.accessToken = token.accessToken
