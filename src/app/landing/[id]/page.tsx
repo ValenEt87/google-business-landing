@@ -10,22 +10,23 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchBusiness = async () => {
       try {
-        const res = await fetch(`/api/business`)
-        const list: BusinessDTO[] = await res.json()
-
-        const found = list.find((b) => b.id === id) || null
-        setBusiness(found)
+        const res = await fetch(`/api/business`);
+        const list: BusinessDTO[] = await res.json();
+        const found = list.find((b) => b.id === id) || null;
+        setBusiness(found);
       } catch (error) {
-        console.error("Error fetching business:", error)
+        console.error("Error fetching business:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchBusiness()
-  }, [id])
+    fetchBusiness();
+  }, [id]);
 
   if (loading) return <p>Cargando landing...</p>
   if (!business) return <p>No se encontró información del negocio.</p>

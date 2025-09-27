@@ -8,7 +8,16 @@ export async function GET() {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user?.email) {
-    return new Response(JSON.stringify([] satisfies BusinessDTO[]), { status: 401 })
+    const mock: BusinessDTO[] = mockLocations.locations.map((loc) => ({
+      id: loc.name,
+      title: loc.title,
+      phone: loc.phoneNumbers?.primaryPhone ?? null,
+      address: loc.storefrontAddress?.addressLines?.join(", ") ?? null,
+      website: loc.websiteUri ?? null,
+      hours: loc.regularHours ?? null,
+    }));
+
+    return new Response(JSON.stringify(mock), { status: 200 });
   }
 
   const businesses = await prisma.business.findMany({
