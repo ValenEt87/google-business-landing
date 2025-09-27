@@ -50,6 +50,8 @@ export const authOptions: NextAuthOptions = {
           )
           const accountsData = await resAccounts.json()
 
+          console.log("📦 Accounts data:", accountsData) // 👈
+
           let locationsData: unknown = null
 
           if (accountsData?.accounts?.length) {
@@ -59,6 +61,7 @@ export const authOptions: NextAuthOptions = {
               { headers }
             )
             locationsData = await resLocations.json()
+                console.log("📍 Locations data:", locationsData) // 👈
           }
 
           // si hay locations reales, guardamos; si no, quedará vacío

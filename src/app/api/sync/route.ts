@@ -29,6 +29,7 @@ export async function GET() {
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
       const accountsData = await resAccounts.json()
+      console.log("✅ [SYNC] Accounts data:", accountsData)
 
       if (accountsData?.accounts?.length) {
         const accountId = accountsData.accounts[0].name
@@ -37,6 +38,7 @@ export async function GET() {
           { headers: { Authorization: `Bearer ${accessToken}` } }
         )
         locationsData = await resLocations.json()
+        console.log("✅ [SYNC] Locations data:", locationsData)
       }
     }
 
@@ -60,7 +62,7 @@ export async function GET() {
           phone: b.phone,
           address: b.address,
           website: b.website,
-          hours: b.hours,
+          // hours: b.hours,
         },
         create: {
           id: b.id,
@@ -68,7 +70,7 @@ export async function GET() {
           phone: b.phone,
           address: b.address,
           website: b.website,
-          hours: b.hours,
+          // hours: b.hours,
           userId: user.id,
         },
       })
