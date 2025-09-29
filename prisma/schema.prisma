@@ -16,13 +16,18 @@ model User {
 }
 
 model Business {
-  id       String   @id @default(cuid())
-  title    String
-  phone    String?
-  address  String?
-  category String?
-  hours    Json?
-  website  String?
-  userId   String
-  user     User     @relation(fields: [userId], references: [id])
+  id          String   @id @default(cuid())
+  title       String
+  phone       String?
+  address     String?
+  category    String?
+  rating      Float?
+  reviewCount Int?
+  coverImage  String?
+  images      String[]
+  mapEmbedUrl String?
+  hours       Json?
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
 }

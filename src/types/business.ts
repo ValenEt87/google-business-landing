@@ -4,7 +4,12 @@ export interface BusinessDTO {
   title: string
   phone?: string | null
   address?: string | null
-  website?: string | null
+  category?: string
+  rating?: number
+  reviewCount?: number
+  coverImage?: string
+  images?: string[]
+  mapEmbedUrl?: string
   hours?: {
     periods: {
       openDay: string
