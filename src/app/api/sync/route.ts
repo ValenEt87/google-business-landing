@@ -43,7 +43,12 @@ export async function GET() {
     }
 
     // fallback si no hay datos reales
-    const source = locationsData?.locations?.length ? locationsData : mockLocations
+    // const source = locationsData?.locations?.length ? locationsData : mockLocations
+    const source = locationsData?.locations?.length ? locationsData : null
+      if (!source) {
+        console.log("⚠️ No se encontraron negocios reales. No se guardará ningún negocio.")
+        return new Response(JSON.stringify([]), { status: 200 })
+      }
 
     const businesses: BusinessDTO[] = source.locations.map((loc: any) => ({
       id: loc.name,

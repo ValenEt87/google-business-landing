@@ -20,8 +20,17 @@ export default async function Home() {
 
   // Si tiene negocio asociado → redirigir a su landing
   if (user?.businesses[0]) {
-    redirect(`/landing/${user.businesses[0].id}`)
+  if (user.businesses[0].id.startsWith("mock-")) {
+    // no redirige
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>No se encontraron negocios reales para esta cuenta.</p>
+      </div>
+    )
   }
+
+  redirect(`/landing/${user.businesses[0].id}`)
+}
 
   // Si no tiene negocios aún
   return (
