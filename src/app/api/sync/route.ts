@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]/route"
 import { prisma } from "@/lib/prisma"
-import { mockLocations } from "@/app/landing/[id]/mock"
+import { mockBusinesses } from "@/app/landing/[id]/mock"
 import type { BusinessDTO } from "@/types/business"
 
 export async function GET() {
@@ -84,6 +84,6 @@ export async function GET() {
     return new Response(JSON.stringify(businesses), { status: 200 })
   } catch (error) {
     console.error("❌ Error en sync:", error)
-    return new Response(JSON.stringify(mockLocations), { status: 200 })
+    return new Response(JSON.stringify(mockBusinesses), { status: 200 })
   }
 }
