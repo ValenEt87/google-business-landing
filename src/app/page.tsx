@@ -7,21 +7,30 @@ import { prisma } from "@/lib/prisma"
 export default async function Home() {
   const session = await getServerSession(authOptions)
 
-  // Si no hay sesión, mandar al login
+  // 🔒 Redirigir al login si no hay sesión
   if (!session?.user?.email) {
     redirect("/api/auth/signin")
   }
 
-  // Buscar usuario y negocios
+  // 🔍 Buscar el usuario y sus negocios asociados
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
     include: { businesses: true },
   })
 
-  // Si tiene negocio asociado → redirigir a su landing
-  if (user?.businesses[0]) {
-  if (user.businesses[0].id.startsWith("mock-")) {
-    // no redirige
+  const firstBusiness = user?.businesses?.[0]
+
+  // ⚠️ Si no tiene negocios
+  if (!firstBusiness) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>No se encontraron negocios para esta cuenta.</p>
+      </div>
+    )
+  }
+
+  // ⚠️ Si es un negocio mock, no redirigir
+  if (firstBusiness.id.startsWith("mock-")) {
     return (
       <div className="flex justify-center items-center h-screen">
         <p>No se encontraron negocios reales para esta cuenta.</p>
@@ -29,13 +38,6 @@ export default async function Home() {
     )
   }
 
-  redirect(`/landing/${user.businesses[0].id}`)
-}
-
-  // Si no tiene negocios aún
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <p>No se encontraron negocios para esta cuenta.</p>
-    </div>
-  )
+  // ✅ Redirigir a la landing de su negocio
+  redirect(`/landing/${firstBusiness.id}`)
 }
