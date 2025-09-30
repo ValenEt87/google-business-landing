@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
           const headers = { Authorization: `Bearer ${account.access_token}` }
 
           const resAccounts = await fetch(
-            "https://mybusinessbusinessinformation.googleapis.com/v1/accounts",
+            "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
             { headers }
           )
           const accountsData = await resAccounts.json()
