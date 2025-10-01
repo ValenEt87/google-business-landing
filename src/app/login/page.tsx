@@ -8,7 +8,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen">
       {/* Columna izquierda */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-10">
-        <div className="max-w-sm w-full text-center">
+        <div className="max-w-sm w-full text-center flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold mb-2">¡Bienvenido!</h1>
           <p className="text-gray-500 mb-6">Iniciá sesión con tu cuenta de Google</p>
           <button
@@ -31,7 +31,7 @@ export default function LoginPage() {
       {/* Columna derecha */}
       <div className="hidden md:block md:w-1/2">
         <img
-          src="/login-bg.jpg"
+          src="https://i.pinimg.com/1200x/12/3e/5f/123e5f6e508c58c2bf3453a1d3ee3815.jpg"
           alt="Paisaje"
           className="w-full h-full object-cover rounded-l-3xl"
         />
