@@ -79,7 +79,7 @@ export const authOptions: NextAuthOptions = {
                   phone: loc.phoneNumbers?.primaryPhone || null,
                   address:
                     loc.storefrontAddress?.addressLines?.join(", ") || null,
-                  website: loc.websiteUri || null,
+                  // website: loc.websiteUri || null,
                   hours: loc.regularHours || null,
                 },
                 create: {
@@ -88,7 +88,7 @@ export const authOptions: NextAuthOptions = {
                   phone: loc.phoneNumbers?.primaryPhone || null,
                   address:
                     loc.storefrontAddress?.addressLines?.join(", ") || null,
-                  website: loc.websiteUri || null,
+                  // website: loc.websiteUri || null,
                   hours: loc.regularHours || null,
                   userId: dbUser.id,
                 },
@@ -118,6 +118,9 @@ export const authOptions: NextAuthOptions = {
       if (token.businessId) extended.businessId = token.businessId
       return extended
     },
+  },
+  pages: {
+    signIn: '/login',
   },
 }
 
