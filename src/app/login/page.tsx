@@ -23,7 +23,7 @@ export default function LoginPage() {
             <span className="text-sm font-medium text-black">Continuar con Google</span>
           </button>
           <p className="text-xs text-gray-500 mt-4">
-            ¿No tenés cuenta? <a href="#" className="text-pink-500 font-medium">Registrate gratis</a>
+            ¿No tenés cuenta? <a href="#" className="text-blue-500 font-medium">Registrate gratis</a>
           </p>
         </div>
       </div>
