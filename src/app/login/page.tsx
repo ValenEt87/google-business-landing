@@ -9,11 +9,11 @@ export default function LoginPage() {
       {/* Columna izquierda */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-10">
         <div className="max-w-sm w-full text-center flex flex-col justify-center items-center">
-          <h1 className="text-3xl font-bold mb-2">¡Bienvenido!</h1>
+          <h1 className="text-4xl font-bold mb-2">¡Bienvenido!</h1>
           <p className="text-gray-500 mb-6">Iniciá sesión con tu cuenta de Google</p>
           <button
             onClick={() => signIn('google')}
-            className="flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2 px-4 shadow-sm hover:shadow-md transition"
+            className="flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-6 hover:cursor-pointer transition"
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"

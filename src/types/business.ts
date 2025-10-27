@@ -1,4 +1,5 @@
 // src/types/business.ts
+
 export interface BusinessDTO {
   id: string
   title: string
@@ -17,4 +18,13 @@ export interface BusinessDTO {
       closeTime: string
     }[]
   } | null
+  reviews?: Review[]
+}
+
+export type Review = {
+  authorName: string
+  rating: number
+  text: string
+  relativeTimeDescription: string
+  profilePhotoUrl?: string
 }

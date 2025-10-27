@@ -66,7 +66,6 @@ export async function GET() {
           title: b.title,
           phone: b.phone,
           address: b.address,
-          website: b.website,
           // hours: b.hours,
         },
         create: {
@@ -74,7 +73,6 @@ export async function GET() {
           title: b.title,
           phone: b.phone,
           address: b.address,
-          website: b.website,
           // hours: b.hours,
           userId: user.id,
         },

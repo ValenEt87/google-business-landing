@@ -11,11 +11,39 @@ export const mockBusinesses: BusinessDTO[] = [
     rating: 4.4,
     reviewCount: 315,
     coverImage: "/mock/crecia-main.jpg",
+    reviews: [
+  {
+    authorName: "María López",
+    rating: 5,
+    text: "Excelente lugar, los croissants son espectaculares. Atención muy amable y ambiente cálido.",
+    relativeTimeDescription: "hace 2 semanas",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/65.jpg"
+  },
+  {
+    authorName: "Carlos Gómez",
+    rating: 4,
+    text: "Muy buen café y pastelería. A veces cuesta conseguir mesa.",
+    relativeTimeDescription: "hace 1 mes",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/men/33.jpg"
+  },
+  {
+    authorName: "Lucía Fernández",
+    rating: 5,
+    text: "De mis lugares favoritos en Recoleta, siempre frescos los productos.",
+    relativeTimeDescription: "hace 3 meses",
+    profilePhotoUrl: "https://randomuser.me/api/portraits/women/42.jpg"
+  }
+],
     images: [
-      "/mock/cafe.jpg",
-      "/mock/pasteleria.jpg",
-      "/mock/croissant.jpg",
-      "/mock/tarta.jpg"
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300",
+      "https://picsum.photos/300/300"
     ],
     mapEmbedUrl: "https://maps.google.com/maps?q=Juncal%202179,%20Buenos%20Aires&z=15&output=embed",
     hours: {
@@ -38,7 +66,7 @@ export const mockBusinesses: BusinessDTO[] = [
         {
           openDay: "jueves",
           openTime: "08:00",
-          closeTime: "20:00"
+          closeTime: "18:00"
         },
         {
           openDay: "viernes",
