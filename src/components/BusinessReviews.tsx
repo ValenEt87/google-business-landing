@@ -14,8 +14,8 @@ export default function BusinessReviews({ reviews = [] }: Props) {
   if (!reviews.length) return null
 
   return (
-    <section className="mt-8">
-      <h2 className="text-lg font-semibold mb-4">Reseñas</h2>
+    <section className="my-24">
+      <h2 className="text-3xl mb-4">Reseñas</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {reviews.slice(0, 4).map((r, idx) => (
           <div

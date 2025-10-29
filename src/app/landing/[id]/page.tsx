@@ -34,7 +34,7 @@ export default function LandingPage() {
   if (!business) return <p>No se encontró información del negocio.</p>
 
   return (
-    <main className="max-w-5xl mx-auto py-8">
+    <main className="max-w-6xl mx-auto py-8">
       <section className="mb-6">
         <div className="flex justify-between items-start">
           <h1 className="text-3xl text-[#1F1F1F] mb-2">{business.title}</h1>
@@ -158,13 +158,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="flex flex-wrap gap-3 mb-4">
-        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📍 Información</a>
-        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📍 Cómo llegar</a>
-        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">⭐ Opiniones</a>
-        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📋 Menú</a>
-      </section>
-
       <section className="grid grid-cols-4 gap-2 mb-8">
         {/* Mostrar solo 3 imágenes */}
         {/* {business.images?.slice(0, 3).map((img, index) => (
@@ -211,17 +204,26 @@ export default function LandingPage() {
             <p className="text-sm text-gray-600">Contacto</p>
             <div className="">
               <p className="text-[#1F1F1F] font-medium flex items-center gap-1 text-2xl">
-                💬💬💬
+                💬
               </p>
             </div>
           </div>
 
       </section>
+
+      <section className="flex flex-wrap gap-3 mb-4">
+        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📍 Información</a>
+        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📍 Cómo llegar</a>
+        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">⭐ Opiniones</a>
+        <a href="#" className="border border-[#d2d2d2] text-sm text-[#4d5156] px-4 py-2 rounded-full hover:bg-gray-100">📋 Menú</a>
+      </section>
+
       <BusinessReviews reviews={business.reviews} />
+      
       <div className="flex items-center gap-2">
         <section className="space-y-3 text-gray-800 w-1/2">
-          {/* <h2 className="text-lg font-semibold">Información</h2>
-          <p>Crecia Bollería es una panadería y cafetería de especialidad ubicada en el barrio de Recoleta, en la Ciudad  Autónoma de Buenos Aires. Su dirección es Juncal 2179, en la esquina con Azcuénaga. Se especializan en bollería, panadería y pastelería. 
+          <h2 className="text-3xl mb-4">Información</h2>
+          {/* <p>Crecia Bollería es una panadería y cafetería de especialidad ubicada en el barrio de Recoleta, en la Ciudad  Autónoma de Buenos Aires. Su dirección es Juncal 2179, en la esquina con Azcuénaga. Se especializan en bollería, panadería y pastelería. 
           </p> */}
           {business.address && (
             <p> 
