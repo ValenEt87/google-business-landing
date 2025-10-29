@@ -7,6 +7,7 @@ import BusinessHoursCard from "@/components/BusinessHoursCard"
 import BusinessReviews from "@/components/BusinessReviews"
 import BusinessHeader from "@/components/BusinessHeader"
 import BusinessPopularTimes from "@/components/BusinessPopularTimes"
+import BusinessFooter from "@/components/BusinessFooter"
 
 export default function LandingPage() {
   const { id } = useParams() as { id: string }
@@ -36,13 +37,16 @@ export default function LandingPage() {
   if (!business) return <p>No se encontró información del negocio.</p>
 
   return (
-    <main className="max-w-6xl mx-auto py-8">
-      <BusinessHeader
+    <>
+
+    <BusinessHeader
         title="Cafetería"
         whatsappUrl="https://wa.me/+5492392611482"
         instagramUrl="https://www.instagram.com/creciabolleria/"
         websiteUrl="#"
       />
+
+    <main className="max-w-6xl mx-auto">
       <section className="mb-6">
         <div className="flex justify-between items-start">
           <h1 className="text-3xl text-[#1F1F1F] mb-2">{business.title}</h1>
@@ -274,7 +278,7 @@ export default function LandingPage() {
         </section>
 
         {business.mapEmbedUrl && (
-          <section className="mb-6 w-1/2">
+          <section className="w-1/2">
             <iframe
               src={business.mapEmbedUrl}
               className="w-full h-80 rounded-lg"
@@ -285,5 +289,12 @@ export default function LandingPage() {
         )}
       </div>
     </main>
+    <BusinessFooter
+        title={business.title}
+        phone={business.phone}
+        email="contacto@creciabolleria.com"
+        logoUrl="/mock/footer-logo.png"
+      />
+    </>
   )
 }
