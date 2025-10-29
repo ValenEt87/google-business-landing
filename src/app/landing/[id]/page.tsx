@@ -6,6 +6,7 @@ import type { BusinessDTO } from "@/types/business"
 import BusinessHoursCard from "@/components/BusinessHoursCard"
 import BusinessReviews from "@/components/BusinessReviews"
 import BusinessHeader from "@/components/BusinessHeader"
+import BusinessPopularTimes from "@/components/BusinessPopularTimes"
 
 export default function LandingPage() {
   const { id } = useParams() as { id: string }
@@ -221,6 +222,8 @@ export default function LandingPage() {
 
       <BusinessReviews reviews={business.reviews} />
       
+      <BusinessPopularTimes business={business} />
+
       <div className="flex items-center gap-2">
         <section className="space-y-3 text-gray-800 w-1/2">
           <h2 className="text-3xl mb-4">Información</h2>
