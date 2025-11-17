@@ -49,7 +49,8 @@ export default function LandingPage() {
     <main className="max-w-6xl mx-auto">
       <section className="mb-6">
         <div className="flex justify-between items-start">
-          <h1 className="text-3xl text-[#1F1F1F] mb-2">{business.title}</h1>
+          {/* <h1 className="text-3xl text-[#1F1F1F] mb-2">{business.title}</h1> */}
+          <h1 className="text-5xl mb-2">{business.title}</h1>
 
           {/* Botones de redes */}
           {/* <div className="flex gap-3">
