@@ -204,7 +204,7 @@ export default function LandingPage() {
 
           <BusinessHoursCard business={business} />
 
-          <div className="flex flex-col justify-between rounded-xl p-4 bg-stone-100 hover:bg-stone-200">
+          <div className="flex flex-col justify-between h-32 rounded-xl p-4 bg-stone-100 hover:bg-stone-200">
             <p className="text-sm text-gray-600">Horario de mayor concurrencia</p>
             <div className="">
               <p className="text-[#1F1F1F] font-medium flex items-center gap-1 text-2xl">

@@ -17,7 +17,7 @@ export default function BusinessFooter({
     <footer className="rounded-2xl flex flex-col items-center text-center gap-2 max-w-7xl mx-auto pb-4">
         <div className="bg-gray-100 py-8 px-6 rounded-2xl flex flex-col items-center text-center w-full">
             {/* Nombre del negocio */}
-            <h2 className="text-xl font-medium mb-3">{title}</h2>
+            <h2 className="text-2xl font-medium mb-3">{title}</h2>
 
             {/* Datos de contacto */}
             <div className="text-sm text-gray-700 space-y-1">
